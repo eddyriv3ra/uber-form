@@ -6,35 +6,45 @@ import Errors from "components/Errors";
 import validateValues from "utils/validateFormData";
 import styles from "./Form.module.scss";
 
-const Form = (): ReactElement => {
-  const [values, setValues] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    password: "",
-    city: "",
-    code: "",
-  });
+type ValuesTypes = {
+  email: { value: string; error: string };
+  firstName: { value: string; error: string };
+  lastName: { value: string; error: string };
+  phoneNumber: { value: string; error: string };
+  password: { value: string; error: string };
+  city: { value: string; error: string };
+  code: { value: string; error: string };
+  [key: string]: { value: string; error: string };
+};
 
-  const [errors, setErrors] = useState<string[]>([]);
+const Form = (): ReactElement => {
+  const [values, setValues] = useState<ValuesTypes>({
+    email: { value: "", error: "" },
+    firstName: { value: "", error: "" },
+    lastName: { value: "", error: "" },
+    phoneNumber: { value: "", error: "" },
+    password: { value: "", error: "" },
+    city: { value: "", error: "" },
+    code: { value: "", error: "" },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errorsValidation = validateValues(values);
-    const errorValues = Object.values(errorsValidation);
+    const checkErrors = Object.values(errorsValidation).some(
+      (element) => element.error !== "",
+    );
 
-    const filterErrors = errorValues.filter((el) => {
-      return el !== "";
-    });
-
-    if (errorValues.length > 0) {
-      setErrors(filterErrors);
+    if (checkErrors) {
+      setValues({ ...values, ...errorsValidation });
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({
+      ...values,
+      [e.target.name]: { value: e.target.value, error: "" },
+    });
   };
 
   return (
@@ -45,7 +55,8 @@ const Form = (): ReactElement => {
         name="email"
         placeholder="Email"
         customStyles={styles.emailInput}
-        value={values.email}
+        value={values.email.value}
+        error={values.email.error}
         onChange={handleChange}
       />
       <div className={styles.textWrapper}>
@@ -53,16 +64,18 @@ const Form = (): ReactElement => {
           type="text"
           name="firstName"
           placeholder="Name"
-          value={values.firstName}
+          value={values.firstName.value}
           customStyles={styles.name}
+          error={values.firstName.error}
           onChange={handleChange}
         />
         <TextField
           type="text"
           name="lastName"
           placeholder="Apellido"
-          value={values.lastName}
+          value={values.lastName.value}
           customStyles={styles.name}
+          error={values.lastName.error}
           onChange={handleChange}
         />
       </div>
@@ -70,31 +83,34 @@ const Form = (): ReactElement => {
         type="tel"
         name="phoneNumber"
         placeholder="Telefono"
-        value={values.phoneNumber}
+        value={values.phoneNumber.value}
         customStyles={styles.phoneInput}
+        error={values.phoneNumber.error}
         onChange={handleChange}
       />
       <TextField
         type="password"
         name="password"
         placeholder="Crear Contraseña"
-        value={values.password}
+        value={values.password.value}
         customStyles={styles.passwordInput}
+        error={values.password.error}
         onChange={handleChange}
       />
       <TextField
         type="text"
         name="city"
         placeholder="Ciudad"
-        value={values.city}
+        value={values.city.value}
         customStyles={styles.cityInput}
+        error={values.email.error}
         onChange={handleChange}
       />
       <TextField
         type="text"
         name="code"
         placeholder="Codigo de invitacion (opcional)"
-        value={values.code}
+        value={values.code.value}
         customStyles={styles.codeInput}
         onChange={handleChange}
       />
@@ -116,8 +132,6 @@ const Form = (): ReactElement => {
         baja.
       </p>
       <Button label="SIGUIENTE" handleClick={handleSubmit} />
-
-      {errors.length > 0 ? <Errors data={errors} /> : null}
     </Container>
   );
 };

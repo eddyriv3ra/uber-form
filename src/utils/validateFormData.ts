@@ -1,48 +1,31 @@
+import errorMessages from "constants/errorMessages";
+
 type ValuesType = {
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  password: string;
-  city: string;
+  email: { value: string; error: string };
+  firstName: { value: string; error: string };
+  lastName: { value: string; error: string };
+  phoneNumber: { value: string; error: string };
+  password: { value: string; error: string };
+  city: { value: string; error: string };
 };
 
-const validateData = (values: ValuesType): ValuesType => {
-  const errors = {
-    email: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    city: "",
-    password: "",
-  };
-  if (!values.email) {
-    errors.email = "El correo electronico es obligatorio.";
-  }
-
-  if (!values.firstName) {
-    errors.firstName = "El nombre es obligatorio.";
-  }
-
-  if (!values.lastName) {
-    errors.lastName = "El apellido es obligatorio.";
-  }
-
-  if (!values.phoneNumber) {
-    errors.phoneNumber = "El número de teléfono es obligatorio.";
-  }
-
-  if (!values.city) {
-    errors.city = "La ciudad es obligatoria.";
-  }
-
-  if (!values.password) {
-    errors.password = "La contraseña es obligatoria.";
-  }
-
-  console.log("errors", errors);
-
-  return errors;
+const validateData = (values: ValuesType) => {
+  return Object.entries(values).reduce(
+    (acc, currentValue) => {
+      const key = currentValue[0];
+      if (currentValue[1].value === "") {
+        return {
+          ...acc,
+          [key]: {
+            ...currentValue[1],
+            error: errorMessages[key],
+          },
+        };
+      }
+      return acc;
+    },
+    { ...values } as { [key: string]: { value: string; error: string } },
+  );
 };
 
 export default validateData;

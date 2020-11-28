@@ -8,10 +8,12 @@ type TextFieldProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   placeholder: string;
+  error?: string;
 };
 
 const defaultProps = {
   customStyles: "",
+  error: "",
 };
 
 const TextField = ({
@@ -21,13 +23,14 @@ const TextField = ({
   onChange,
   value,
   placeholder,
+  error,
 }: TextFieldProps & typeof defaultProps): ReactElement => {
   return (
     <input
       type={type}
       name={name}
       placeholder={placeholder}
-      className={`${styles.input} ${customStyles}`}
+      className={`${styles.input} ${customStyles} ${error ? styles.error : ""}`}
       value={value}
       onChange={onChange}
     />
