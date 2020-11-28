@@ -1,6 +1,9 @@
-@import "../styles/abstracts/_variables";
+@import "styles/abstracts/_variables";
 
 .app {
   background-color: $color-main-background;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

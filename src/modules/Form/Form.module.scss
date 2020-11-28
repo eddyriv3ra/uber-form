@@ -1,0 +1,8 @@
+@import "styles/abstracts/_variables";
+
+.input {
+  height: 5rem;
+  background-color: $color-main-input;
+  border: 1px solid $color-border-input;
+  padding: 0.8rem 1.8rem;
+}
