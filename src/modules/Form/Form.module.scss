@@ -1,8 +1,15 @@
-@import "styles/abstracts/_variables";
+.container {
+  width: 40rem;
+  padding: 3.2rem;
+}
 
-.input {
-  height: 5rem;
-  background-color: $color-main-input;
-  border: 1px solid $color-border-input;
-  padding: 0.8rem 1.8rem;
+.formInfo {
+  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+.emailInput {
+  width: 100%;
+  margin-bottom: 1.2rem;
 }
