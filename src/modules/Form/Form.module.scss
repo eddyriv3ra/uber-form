@@ -1,5 +1,8 @@
+@import "styles/abstracts/_variables";
+
 .container {
   width: 40rem;
+  height: 100%;
   padding: 3.2rem;
 }
 
@@ -12,29 +15,54 @@
 .emailInput {
   width: 100%;
   margin-bottom: 1.2rem;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #11939a;
+  }
 }
 
 .phoneInput {
   width: 100%;
+  &:focus {
+    outline: none;
+    border: 1px solid #11939a;
+  }
 }
 
 .passwordInput {
   width: 100%;
   margin-bottom: 1.2rem;
+  &:focus {
+    outline: none;
+    border: 1px solid #11939a;
+  }
 }
 
 .cityInput {
   width: 100%;
   margin-bottom: 1.2rem;
+  &:focus {
+    outline: none;
+    border: 1px solid #11939a;
+  }
 }
 
 .codeInput {
   width: 100%;
   margin-bottom: 1.2rem;
+  &:focus {
+    outline: none;
+    border: 1px solid #11939a;
+  }
 }
 
 .name {
   width: 50%;
+  &:focus {
+    outline: none;
+    border: 1px solid #11939a;
+  }
 }
 
 .textWrapper {

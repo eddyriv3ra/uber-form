@@ -1,0 +1,19 @@
+@import "styles/abstracts/_variables";
+
+.button {
+  background-color: $color-button-main;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  border-radius: 0px;
+  outline: none;
+  border: 2px solid rgb(17, 147, 154);
+  color: $color-primary;
+
+  &:hover {
+    background-color: #0e7d83;
+    border-color: #0e7d83;
+  }
+}
