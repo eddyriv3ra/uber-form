@@ -6,6 +6,12 @@ import styles from "./Form.module.scss";
 const Form = (): ReactElement => {
   const [value, setValue] = useState({
     email: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    password: "",
+    city: "",
+    code: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,6 +34,73 @@ const Form = (): ReactElement => {
           value={value.email}
           onChange={handleChange}
         />
+        <div className={styles.textWrapper}>
+          <TextField
+            type="text"
+            name="firstName"
+            placeholder="Name"
+            value={value.firstName}
+            customStyles={styles.name}
+            onChange={handleChange}
+          />
+          <TextField
+            type="text"
+            name="lastName"
+            placeholder="Apellido"
+            value={value.lastName}
+            customStyles={styles.name}
+            onChange={handleChange}
+          />
+        </div>
+        <TextField
+          type="tel"
+          name="phoneNumber"
+          placeholder="Telefono"
+          value={value.phoneNumber}
+          customStyles={styles.phoneInput}
+          onChange={handleChange}
+        />
+        <TextField
+          type="password"
+          name="password"
+          placeholder="Crear Contraseña"
+          value={value.password}
+          customStyles={styles.passwordInput}
+          onChange={handleChange}
+        />
+        <TextField
+          type="text"
+          name="city"
+          placeholder="Ciudad"
+          value={value.city}
+          customStyles={styles.cityInput}
+          onChange={handleChange}
+        />
+        <TextField
+          type="text"
+          name="code"
+          placeholder="Codigo de invitacion (opcional)"
+          value={value.code}
+          customStyles={styles.codeInput}
+          onChange={handleChange}
+        />
+        <p className={styles.paragraph}>
+          Al continuar, acepto recibir llamadas o mensajes SMS, aunque procedan
+          de marcadores automatizados, de Uber y sus filiales en el número que
+          he proporcionado. Entiendo que puedo enviar la palabra
+          &quot;STOP&quot; al 89203 para dejar de recibir mensajes.
+        </p>
+        <p className={styles.paragraph}>
+          Al continuar, también acepto recibir comunicaciones de marketing de
+          Uber, aunque procedan de marcadores automáticos, por SMS en el número
+          que he proporcionado. Estos mensajes podrán promocionar productos y
+          servicios de Uber, como viajes, Uber Eats o patinetes y bicis JUMP,
+          así como productos y servicios de nuestros socios. Entiendo que dar mi
+          consentimiento para recibir estos mensajes de marketing no es
+          obligatorio para usar los servicios de Uber. En cualquier momento
+          puedo responder a cualquier mensaje de Uber con la palabra STOP para
+          darme de baja.
+        </p>
       </form>
     </Container>
   );
