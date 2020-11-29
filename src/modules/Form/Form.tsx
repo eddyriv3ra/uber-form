@@ -132,6 +132,9 @@ const Form = (): ReactElement => {
         baja.
       </p>
       <Button label="SIGUIENTE" handleClick={handleSubmit} />
+      {Object.values(values).some((el) => el.error !== "") ? (
+        <Errors data={Object.values(values)} />
+      ) : null}
     </Container>
   );
 };
