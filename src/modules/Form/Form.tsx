@@ -28,7 +28,9 @@ const Form = (): ReactElement => {
     code: { value: "", error: "" },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errorsValidation = validateValues(values);
     const checkErrors = Object.values(errorsValidation).some(
@@ -37,6 +39,15 @@ const Form = (): ReactElement => {
 
     if (checkErrors) {
       setValues({ ...values, ...errorsValidation });
+    } else {
+      const result = await fetch("/api/driver", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
+
+      const resoteturnValue = await result.json();
+
+      setMessage(resoteturnValue.data);
     }
   };
 
@@ -120,21 +131,12 @@ const Form = (): ReactElement => {
         proporcionado. Entiendo que puedo enviar la palabra &quot;STOP&quot; al
         89203 para dejar de recibir mensajes.
       </p>
-      <p className={styles.paragraph}>
-        Al continuar, también acepto recibir comunicaciones de marketing de
-        Uber, aunque procedan de marcadores automáticos, por SMS en el número
-        que he proporcionado. Estos mensajes podrán promocionar productos y
-        servicios de Uber, como viajes, Uber Eats o patinetes y bicis JUMP, así
-        como productos y servicios de nuestros socios. Entiendo que dar mi
-        consentimiento para recibir estos mensajes de marketing no es
-        obligatorio para usar los servicios de Uber. En cualquier momento puedo
-        responder a cualquier mensaje de Uber con la palabra STOP para darme de
-        baja.
-      </p>
       <Button label="SIGUIENTE" handleClick={handleSubmit} />
       {Object.values(values).some((el) => el.error !== "") ? (
         <Errors data={Object.values(values)} />
       ) : null}
+
+      {message ? <div className={styles.msg}>{message}</div> : null}
     </Container>
   );
 };

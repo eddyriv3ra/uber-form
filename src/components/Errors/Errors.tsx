@@ -15,7 +15,10 @@ const Errors = ({ data }: ErrorType): ReactElement => {
     <div className={styles.container}>
       <ul>
         {data.map((element: ValuesType, index) => {
-          return <li key={`${index + 1}`}>{element.error}</li>;
+          if (element.error !== "") {
+            return <li key={`${index + 1}`}>{element.error}</li>;
+          }
+          return null;
         })}
       </ul>
     </div>

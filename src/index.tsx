@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/main.scss";
+import makeServer from "utils/server";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
+if (process.env.NODE_ENV === "development") {
+  makeServer();
+}
 
 ReactDOM.render(
   <React.StrictMode>
